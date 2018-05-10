@@ -7,22 +7,27 @@ let guessesSoFar = [];
 let guessesLeft = 0;
 
 function loadTvShows() {
-    let obj1 = {tvShow: "The Rockford Files", link:"https://youtu.be/sQhwRr_-g50", compareText: "the rockford files"}
-    let obj2 = {tvShow: "WKRP in Cincinnati", link:"https://youtu.be/YQvCNLIVydM", compareText: "wkrp in cincinnati"}
+    // let obj1 = {tvShow: "The Rockford Files", link:"https://youtu.be/sQhwRr_-g50", compareText: "the rockford files"}
+    let obj1 = {tvShow: "The Rockford Files", link:"https://www.youtube.com/embed/sQhwRr_-g50", compareText: "the rockford files"}
+    let obj2 = {tvShow: "WKRP in Cincinnati", link:"https://www.youtube.com/embed/YQvCNLIVydM", compareText: "wkrp in cincinnati"}
+    let obj3 = {tvShow: "Rawhide", link:"https://www.youtube.com/embed/E_XRfvBKEiY", compareText: "rawhide"}
+    
     tvShows.push(obj1);
     tvShows.push(obj2);
-    document.addEventListener("keydown", processGuess)
+    tvShows.push(obj3);
+    document.getElementById("hangmanPic").style.visibility = "visible";
+    document.getElementById("hangmanIframe").style.display = "none";
+    document.addEventListener("keydown", processGuess);
     resetVars();
 }
 
 function resetVars () {
     document.getElementById("wins").innerHTML="wins:" + wins;
-    tvShow = tvShows[Math.floor((Math.random() * 2))];
+    tvShow = tvShows[Math.floor((Math.random() * 3))];
     document.getElementById("tvTitle").innerHTML=siftTvShow();
     document.getElementById("numberOfGuessesLeft").innerHTML = "Number of guesses left:" + guessesLeft;
     document.getElementById("letterGuessed").innerHTML = ""; 
-    document.getElementById("info").innerHTML = "Press any letter for your first guess.";
-    
+    document.getElementById("info").innerHTML = "Press any letter for your first guess.";    
     guessesSoFar = [];   
 }
 
@@ -51,6 +56,7 @@ function processGuess(e) {
     }
     else {
         document.getElementById("info").innerHTML = "";
+        guessesSoFar.push(e.key);
     }
 
     let ind
@@ -68,4 +74,26 @@ function processGuess(e) {
         tvShowText[indArray[i]] = tvShow.tvShow[indArray[i]]        
     }
     document.getElementById("tvTitle").innerHTML=tvShowText;
+    guessesLeft--;
+    document.getElementById("numberOfGuessesLeft").innerHTML = "Number of guesses left:" + guessesLeft;
+    isGameOver();
+}
+ 
+function isGameOver() {
+    if(guessesLeft === 0) {
+        document.getElementById("info").innerHTML = "Sorry You Lost!"
+        return;
+    }
+
+    for(i = 0; i < tvShowText.length; i++) {
+        if(tvShowText[i] !== tvShow.tvShow[i]) {
+            return;
+        }
+    }    
+    document.getElementById("info").innerHTML = "Congratulations You Have Won!"
+    document.getElementById("hangmanIframe").style.display = "block";
+    document.getElementById("hangmanPic").style.display = "none";
+    document.getElementById("hangmanIframe").src = tvShow.link;
+    wins++;
+    document.getElementById("wins").innerHTML = "wins:" + wins;
 }
