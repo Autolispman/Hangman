@@ -1,0 +1,17 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: chocolate;
+}
+
+/* .video {
+    max-width: 600px;
+    max-height: 600px;
+} */
+
+.colDressing {
+    border: skyblue dotted 2px;
+    align-items: center;
+}
