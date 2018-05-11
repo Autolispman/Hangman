@@ -8,7 +8,7 @@ let guessesLeft = 0;
 
 function loadTvShows() {
     // let obj1 = {tvShow: "The Rockford Files", link:"https://youtu.be/sQhwRr_-g50", compareText: "the rockford files"}
-    let obj1 = {tvShow: "The Rockford Files", link:"https://www.youtube.com/embed/sQhwRr_-g50", compareText: "the rockford files"}
+    let obj1 = {tvShow: "The Rockford Files", link:"assets/images/The Rockford Files.wmv", compareText: "the rockford files"}
     let obj2 = {tvShow: "WKRP in Cincinnati", link:"https://www.youtube.com/embed/YQvCNLIVydM", compareText: "wkrp in cincinnati"}
     let obj3 = {tvShow: "Rawhide", link:"https://www.youtube.com/embed/E_XRfvBKEiY", compareText: "rawhide"}
     
@@ -27,7 +27,8 @@ function resetVars () {
     document.getElementById("tvTitle").innerHTML=siftTvShow();
     document.getElementById("numberOfGuessesLeft").innerHTML = "Number of guesses left:" + guessesLeft;
     document.getElementById("letterGuessed").innerHTML = ""; 
-    document.getElementById("info").innerHTML = "Press any letter for your first guess.";    
+    document.getElementById("info").innerHTML = "Press any letter for your first guess.";  
+    document.getElementById("guessesSoFar").innerHTML = "";  
     guessesSoFar = [];   
 }
 
@@ -45,8 +46,8 @@ function siftTvShow() {
     return tvShowText;
 }
 
-function processGuess(e) {
-    if(alpha.indexOf(e.key) < 0){
+function processGuess(e) {    
+    if(alpha.indexOf(e.key.toLowerCase()) < 0){
         alert("Character " + e.key + " is not a valid key. Try again.")
         return;
     }
@@ -57,6 +58,7 @@ function processGuess(e) {
     else {
         document.getElementById("info").innerHTML = "";
         guessesSoFar.push(e.key);
+        document.getElementById("guessesSoFar").innerHTML = "Letters guessed: " + guessesSoFar;
     }
 
     let ind
@@ -75,7 +77,7 @@ function processGuess(e) {
     }
     document.getElementById("tvTitle").innerHTML=tvShowText;
     guessesLeft--;
-    document.getElementById("numberOfGuessesLeft").innerHTML = "Number of guesses left:" + guessesLeft;
+    document.getElementById("numberOfGuessesLeft").innerHTML = "Number of guesses left:" + guessesLeft;    
     isGameOver();
 }
  
