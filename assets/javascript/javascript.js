@@ -13,7 +13,7 @@ function loadTvShows() {
     let obj3 = {tvShow: "Rawhide", link:"assets/images/Rawhide.mp4", compareText: "rawhide"}
     let obj4 = {tvShow: "Flintstones", link:"assets/images/Flintstones.mp4", compareText: "Flintstones"}
     let obj5 = {tvShow: "Gilligans Island", link:"assets/images/Gilligans Island.mp4", compareText: "gilligans island"}
-    let obj6 = {tvShow: "Hawaii Five O", link:"assets/images/Hawaii Five O.mp4", compareText: "hawaii five O"}
+    let obj6 = {tvShow: "Hawaii Five O", link:"assets/images/Hawaii Five O.mp4", compareText: "hawaii five o"}
     let obj7 = {tvShow: "Jeopardy", link:"assets/images/Jeopardy.mp4", compareText: "jeopardy"}
     let obj8 = {tvShow: "Knight Rider", link:"assets/images/Knight Rider.mp4", compareText: "knight rider"}
     let obj9 = {tvShow: "Mission Impossible", link:"assets/images/Mission Impossible.mp4", compareText: "mission impossible"}
