@@ -6,12 +6,38 @@ body {
     background-color: chocolate;
 }
 
-/* .video {
-    max-width: 600px;
-    max-height: 600px;
-} */
+h1, h3 {
+    padding: 20px;
+}
+
+p {
+    font-size: 24px;
+}
 
 .colDressing {
     border: skyblue dotted 2px;
     align-items: center;
+    display: inline-block;
+    padding: 40px;
+    margin: 30px;
+    width: 500px;
+    min-height: 400px;
 }
+
+#hangmanHeader {
+    background-color: blanchedalmond;
+}
+
+#hangmanPic, #hangmanIframe {
+    margin: auto;
+    vertical-align: auto;
+}
+
+#newGame {
+    width: 146px;
+    height: 42px;
+    font-size: 24px;
+    text-align: center;
+    background-color: aqua;
+}
+
