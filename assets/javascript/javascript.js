@@ -50,7 +50,7 @@ function loadTvShows() {
     tvShows.push(obj19);
     tvShows.push(obj20);
     
-    document.addEventListener("keydown", processGuess);
+    document.addEventListener("keydown", processGuess);    
     resetVars();
 }
 
