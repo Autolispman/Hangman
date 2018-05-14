@@ -11,7 +11,7 @@ function loadTvShows() {
     let obj1 = {tvShow: "The Rockford Files", link:"assets/images/The Rockford Files.mp4", compareText: "the rockford files"}
     let obj2 = {tvShow: "WKRP in Cincinnati", link:"assets/images/WKRP in Cincinnati.mp4", compareText: "wkrp in cincinnati"}
     let obj3 = {tvShow: "Rawhide", link:"assets/images/Rawhide.mp4", compareText: "rawhide"}
-    let obj4 = {tvShow: "Flintstones", link:"assets/images/Flintstones.mp4", compareText: "Flintstones"}
+    let obj4 = {tvShow: "Flintstones", link:"assets/images/Flintstones.mp4", compareText: "flintstones"}
     let obj5 = {tvShow: "Gilligans Island", link:"assets/images/Gilligans Island.mp4", compareText: "gilligans island"}
     let obj6 = {tvShow: "Hawaii Five O", link:"assets/images/Hawaii Five O.mp4", compareText: "hawaii five o"}
     let obj7 = {tvShow: "Jeopardy", link:"assets/images/Jeopardy.mp4", compareText: "jeopardy"}
@@ -62,9 +62,8 @@ function resetVars () {
     tvShow = tvShows[Math.floor((Math.random() * tvShows.length))];
     document.getElementById("tvTitle").innerHTML=siftTvShow();
     document.getElementById("numberOfGuessesLeft").innerHTML = "Number of guesses left:" + guessesLeft;
-    document.getElementById("letterGuessed").innerHTML = ""; 
     document.getElementById("info").innerHTML = "Press any letter for your first guess.";  
-    document.getElementById("guessesSoFar").innerHTML = "";  
+    document.getElementById("guessesSoFar").innerHTML = "Letters guessed:";  
     guessesSoFar = [];
 }
 
@@ -82,7 +81,7 @@ function siftTvShow() {
     return tvShowText;
 }
 
-function processGuess(e) {    
+function processGuess(e) {
     if(alpha.indexOf(e.key.toLowerCase()) < 0){
         document.getElementById("info").innerHTML = "Character " + e.key + " is not a valid key. Try again.";
         return;
@@ -91,30 +90,29 @@ function processGuess(e) {
         document.getElementById("info").innerHTML = "You have already guessed " + e.key;
         return;
     }
-    else {
-        document.getElementById("info").innerHTML = "";
+    if(document.getElementById("tvTitle").innerHTML.indexOf("_") > -1) {
+        document.getElementById("info").innerHTML = e.key;
         guessesSoFar.push(e.key);
         document.getElementById("guessesSoFar").innerHTML = "Letters guessed: " + guessesSoFar;
+        let ind
+        let indArray = [];
+        for(i = 0; i < tvShow.tvShow.length; i++)
+        {
+            ind = tvShow.compareText.indexOf(e.key.toLowerCase(), i);
+            if(ind > -1) {
+                indArray.push(ind);
+                i = ind
+            }
+        }
+        let index;
+        for(i = 0; i < indArray.length; i++){
+            tvShowText[indArray[i]] = tvShow.tvShow[indArray[i]]        
+        }
+        document.getElementById("tvTitle").innerHTML=tvShowText;
+        guessesLeft--;
+        document.getElementById("numberOfGuessesLeft").innerHTML = "Number of guesses left:" + guessesLeft;    
+        isGameOver();
     }
-
-    let ind
-    let indArray = [];
-    for(i = 0; i < tvShow.tvShow.length; i++)
-    {
-         ind = tvShow.compareText.indexOf(e.key.toLowerCase(), i);
-         if(ind > -1) {
-             indArray.push(ind);
-             i = ind
-         }
-    }
-    let index;
-    for(i = 0; i < indArray.length; i++){
-        tvShowText[indArray[i]] = tvShow.tvShow[indArray[i]]        
-    }
-    document.getElementById("tvTitle").innerHTML=tvShowText;
-    guessesLeft--;
-    document.getElementById("numberOfGuessesLeft").innerHTML = "Number of guesses left:" + guessesLeft;    
-    isGameOver();
 }
  
 function isGameOver() {
